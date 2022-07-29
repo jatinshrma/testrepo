@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <button id="platform" style="display:none;"></button>
+        <button id="phonepe"><a href="#">PhonePe</a></button>
+        <button id="gpay"><a href="#">GooglePe</a></button>
+        <button id="paytm"><a href="#">PayTm</a></button>
+        <button id="select"><a href="#">Select Other Apps</a></button>
+    </div>
+
+    <script defer>
+        window.onload = e => {
+            const uri = 'pay?pa=fooddo1@icici&pn=fooddo&tr=EZV2022072522022328798751&am=110&cu=INR&mc=5411'
+            let OS = "Unknown OS";
+            if (navigator.userAgent.indexOf("Win") != -1) OS = "Windows OS";
+            if (navigator.userAgent.indexOf("Mac") != -1) OS = "Macintosh";
+            if (navigator.userAgent.indexOf("Linux") != -1) OS = "Linux OS";
+            if (navigator.userAgent.indexOf("Android") != -1) OS = "Android OS";
+            if (navigator.userAgent.indexOf("like Mac") != -1) OS = "iOS";
+            document.getElementById('platform').innerText = OS
+            document.getElementById('platform').style.display = 'inline'
+
+            const upis = {}
+            upis.gpay = 'gpay://upi/' + uri
+            upis.phonepe = 'phonepe://' + uri
+            upis.paytm = 'paytmmp://' + uri
+            upis.select = 'upi://' + uri
+
+            for (const id in upis) {
+                console.log(id, upis[id])
+                document.querySelector(`#${id} a`).href = upis[id]
+            }
+            console.log(platform)
+        }
+    </script>
+</body>
+
+</html>
